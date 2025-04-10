@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Weather App</title>
+    <link rel="shortcut icon" href="download.png" type="image/x-icon">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+
+    <!-- Link to Font Awesome from your workspace -->
+    <link rel="stylesheet" href="./fontawesome/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Handjet:wght@100;200;300;400;500;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Current Location -->
+        <div class="current-location" id="current-location">Fetching location...</div>
+
+        <!-- Current Time -->
+        <div class="current-time" id="current-time">--:--:--</div>
+
+        <!-- Search Box -->
+        <div class="search-box">
+            <i class="fa-solid fa-location-dot"></i>
+            <input id="city" class="city" type="text" placeholder="Enter your location">
+            <button class="fa-solid fa-magnifying-glass"></button>
+        </div>
+
+        <!-- Not Found Section -->
+        <div class="not-found">
+            <img src="./download.png" alt="Not Found">
+        </div>
+
+        <!-- Weather Box -->
+        <div class="weather-box">
+            <img src="./No-Data-Found.png" alt="Weather Icon">
+            <p class="temperature">--°C</p>
+            <p class="description">No Data</p>
+        </div>
+
+        <!-- Weather Details -->
+        <div class="weather-details">
+            <div class="humidity">
+                <i class="fa-solid fa-droplet"></i>
+                <div class="text">
+                    <span>--%</span>
+                    <p>Humidity</p>
+                </div>
+            </div>
+
+            <div class="wind">
+                <i class="fa-solid fa-wind"></i>
+                <div class="text">
+                    <span>-- km/h</span>
+                    <p>Wind Speed</p>
+                </div>
+            </div>
+
+            <div class="pressure">
+                <i class="fa-solid fa-gauge-high"></i>
+                <div class="text">
+                    <span>-- hPa</span>
+                    <p>Pressure</p>
+                </div>
+            </div>
+
+            <div class="visibility">
+                <i class="fa-solid fa-eye"></i>
+                <div class="text">
+                    <span>-- km</span>
+                    <p>Visibility</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="additional-info">
+            <div class="sunrise">
+                <i class="fa-solid fa-sun"></i>
+                <div class="text">
+                    <span>--:-- AM</span>
+                    <p>Sunrise</p>
+                </div>
+            </div>
+
+            <div class="sunset">
+                <i class="fa-solid fa-moon"></i>
+                <div class="text">
+                    <span>--:-- PM</span>
+                    <p>Sunset</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FontAwesome and Scripts -->
+    <script src="./fontawesome/js/all.min.js"></script>
+    <script src='main.js'></script>
+</body>
+
+</html>
