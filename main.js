@@ -79,41 +79,59 @@ const makeSearch = () => {
       const sunrise = document.querySelector(".additional-info .sunrise span");
       const sunset = document.querySelector(".additional-info .sunset span");
 
-      // Use better quality GIFs for weather conditions
-      switch (json.weather[0].main) {
-        case "Clear":
-          image.src = "https://i.imgur.com/yR9OWXH.gif"; // Sunny clear sky
-          break;
+      const weatherIcons = {
+        Clear: [
+          "https://i.imgur.com/yR9OWXH.gif",
+          "https://i.pinimg.com/originals/53/22/c2/5322c2cad533e12e552d0dfdc89b4c25.gif",
+          "https://openweathermap.org/img/wn/01d@4x.png"
+        ],
+        Rain: [
+          "https://i.imgur.com/xqJmKyO.gif",
+          "https://i.pinimg.com/originals/f2/f5/20/f2f520c7a6185da76203b78e5afe1377.gif",
+          "https://openweathermap.org/img/wn/10d@4x.png"
+        ],
+        Snow: [
+          "https://i.imgur.com/UzPmvSP.gif",
+          "https://i.pinimg.com/originals/65/dc/98/65dc98171c2ef187d8107960b369429c.gif",
+          "https://openweathermap.org/img/wn/13d@4x.png"
+        ],
+        Clouds: [
+          "https://i.imgur.com/MOXwGGP.gif",
+          "https://i.pinimg.com/originals/3b/00/ca/3b00ca43e0fa60f11d501d5c1bb7a31f.gif",
+          "https://openweathermap.org/img/wn/03d@4x.png"
+        ],
+        Haze: [
+          "https://i.imgur.com/BvI8CWB.gif",
+          "https://i.pinimg.com/originals/73/d5/19/73d519fdff458c8f8aa52844c730e0b7.gif",
+          "https://openweathermap.org/img/wn/50d@4x.png"
+        ],
+        Thunderstorm: [
+          "https://i.imgur.com/AsLHofJ.gif",
+          "https://i.pinimg.com/originals/57/83/e0/5783e0e65996e6355229d6978676b9f7.gif",
+          "https://openweathermap.org/img/wn/11d@4x.png"
+        ],
+        Drizzle: [
+          "https://i.imgur.com/BQbzoKt.gif",
+          "https://i.pinimg.com/originals/f2/f5/20/f2f520c7a6185da76203b78e5afe1377.gif",
+          "https://openweathermap.org/img/wn/09d@4x.png"
+        ]
+      };
 
-        case "Rain":
-          image.src = "https://i.imgur.com/xqJmKyO.gif"; // Rain animation
-          break;
+      const tryLoadImage = (sources, index, weatherType, imageElement) => {
+        if (index >= sources.length) {
+          imageElement.src = "https://openweathermap.org/img/wn/01d@4x.png"; // Final fallback
+          return;
+        }
 
-        case "Snow":
-          image.src = "https://i.imgur.com/UzPmvSP.gif"; // Snow falling
-          break;
+        imageElement.src = sources[index];
+        imageElement.onerror = () => {
+          tryLoadImage(sources, index + 1, weatherType, imageElement);
+        };
+      };
 
-        case "Clouds":
-          image.src = "https://i.imgur.com/MOXwGGP.gif"; // Cloudy sky
-          break;
-
-        case "Haze":
-        case "Mist":
-        case "Fog":
-          image.src = "https://i.imgur.com/BvI8CWB.gif"; // Foggy/hazy weather
-          break;
-
-        case "Thunderstorm":
-          image.src = "https://i.imgur.com/AsLHofJ.gif"; // Thunder and lightning
-          break;
-
-        case "Drizzle":
-          image.src = "https://i.imgur.com/BQbzoKt.gif"; // Light rain
-          break;
-
-        default:
-          image.src = "https://i.imgur.com/yR9OWXH.gif"; // Default to clear sky
-      }
+      const weatherType = json.weather[0].main;
+      const sources = weatherIcons[weatherType] || weatherIcons.Clear;
+      tryLoadImage(sources, 0, weatherType, image);
 
       temperature.innerHTML = `${parseInt(json.main.temp)}°C`;
       description.innerHTML = `${json.weather[0].description}`;
